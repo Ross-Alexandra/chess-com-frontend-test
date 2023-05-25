@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+
 import ChessBoard from './components/chessBoard/ChessBoard.vue';
 import SideBar from './components/sideBar/SideBar.vue';
 
@@ -27,7 +28,7 @@ export default defineComponent({
     },
     setup() {
         return {
-            theme,
+            theme
         };
     },
     methods: {
@@ -58,11 +59,24 @@ body {
     height: 100vh;
     height: 100svh;
 
+    @media (max-width: 950px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0px, 1fr) 20vh;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-rows: minmax(0px, 1fr) 30vh;
+    }
+
+    @media (max-width: 400px) {
+        grid-template-rows: minmax(0px, 1fr) 40vh;
+    }
+
     &[data-theme="light"] {
         // Theme variables for the app.
         --background-color: #fff;
-        --sidebar-background-color: rgba(0, 15, 20, 0.1);
-        --sidebar-border-color: #2F4F4F;
+        --layer-color: rgba(0, 15, 20, 0.1);
+        --layer-border-color: #2F4F4F;
         --sidebar-text-color: #020A19;
 
         // Theme variables for the chess board.
@@ -74,13 +88,17 @@ body {
         --light-square-highlight-color: #10c200;
         --dark-square-highlight-color: #005c0c;
         --theme-color: #00ad17;
+
+        --button-background-color: var(--dark-square-color);
+        --button-text-color: var(--sidebar-text-color);
+        --button-border-color: var(--layer-border-color);
     }
 
     &[data-theme="dark"] {
         // Theme variables for the app.
         --background-color: #36454F;
-        --sidebar-background-color: rgba(240, 250, 255, 0.1);
-        --sidebar-border-color: #2A3439;
+        --layer-color: rgba(240, 250, 255, 0.1);
+        --layer-border-color: #2A3439;
         --sidebar-text-color: #FDF5E6;
 
         // Theme variables for the chess board.
@@ -93,6 +111,9 @@ body {
         --dark-square-highlight-color: #2e6a9b;
         --theme-color: #012a06;
 
+        --button-background-color: var(--dark-square-color);
+        --button-text-color: var(--sidebar-text-color);
+        --button-border-color: var(--layer-border-color);
     }
 
     background-color: var(--background-color);

@@ -18,20 +18,11 @@
 </template>
 
 <script lang="ts" setup>
+import { getRank, getFile } from '../helpers';
+
 const props = defineProps<{
     squareIndex: number;
 }>();
-
-function getFile(squareIndex: number): string {
-    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-    const letterIndex = squareIndex % 8;
-
-    return letters[letterIndex];
-}
-
-function getRank(squareIndex: number): number {
-    return 9 - Math.ceil((squareIndex + 1) / 8);
-}
 </script>
 
 <style lang="scss" scoped>
@@ -45,12 +36,20 @@ function getRank(squareIndex: number): number {
     transition: border-color 250ms;
 
     &__name {
+        margin: unset;
+
         font-size: 0.75rem;
         font-weight: 700;
         color: var(--rank-and-file-color);
 
         transition: opacity 250ms;
         opacity: 0;
+
+        user-select: none;
+        
+        @media (max-width: 350px) {
+            font-size: 0.5rem;
+        }
     }
 
     &:hover {
