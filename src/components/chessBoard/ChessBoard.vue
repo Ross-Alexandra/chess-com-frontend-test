@@ -48,7 +48,7 @@ function toggleSquare(squareIndex: number): void {
     height: 100%;
     aspect-ratio: 1;
 
-    border: 1px solid var(--board-border-color__light);
+    border: 1px solid var(--board-border-color);
     border-radius: 10px;
 }
 </style>

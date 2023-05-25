@@ -47,7 +47,7 @@ function getRank(squareIndex: number): number {
     &__name {
         font-size: 0.75rem;
         font-weight: 700;
-        color: var(--rank-and-file-color__light);
+        color: var(--rank-and-file-color);
 
         transition: opacity 250ms;
         opacity: 0;
@@ -69,11 +69,11 @@ function getRank(squareIndex: number): number {
     &:nth-child(16n + 10),
     &:nth-child(16n + 12),
     &:nth-child(16n + 14) {
-        background-color: var(--light-square-color__light);
-        border: 10px solid var(--light-square-color__light);
+        background-color: var(--light-square-color);
+        border: 10px solid var(--light-square-color);
 
         &.selected {
-            border: 10px solid var(--light-square-highlight-color__light);
+            border: 10px solid var(--light-square-highlight-color);
         }
     }
 
@@ -85,12 +85,12 @@ function getRank(squareIndex: number): number {
     &:nth-child(16n + 11),
     &:nth-child(16n + 13),
     &:nth-child(16n + 15) {
-        background-color: var(--dark-square-color__light);
-        border: 10px solid var(--dark-square-color__light);
+        background-color: var(--dark-square-color);
+        border: 10px solid var(--dark-square-color);
 
 
         &.selected {
-            border: 10px solid var(--dark-square-highlight-color__light);
+            border: 10px solid var(--dark-square-highlight-color);
         }
     }
 
@@ -104,7 +104,7 @@ function getRank(squareIndex: number): number {
             left: -30px;
             transform: translateY(-50%);
 
-            color: var(--rank-and-file-color__light);
+            color: var(--rank-and-file-color);
             font-weight: 700;
         }
     }
@@ -120,7 +120,7 @@ function getRank(squareIndex: number): number {
             left: 50%;
             transform: translateX(-50%);
 
-            color: var(--rank-and-file-color__light);
+            color: var(--rank-and-file-color);
             font-weight: 700;
         }
     }
