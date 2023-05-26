@@ -49,9 +49,9 @@ All of the original requirements of the challenge were met, and the additional f
 
 ## Design Decisions
 - In order to support allowing a user to un-highlight a square, the following design decisions were made:
- - The sidebar tags are clickable, allowing a user to un-highlight a square.
- - Highlighted squares are clickable, allowing a user to un-highlight a square.
- - A clear button was added to the sidebar to allow the user to clear the squares that have been clicked.
+  - The sidebar tags are clickable, allowing a user to un-highlight a square.
+  - Highlighted squares are clickable, allowing a user to un-highlight a square.
+  - A clear button was added to the sidebar to allow the user to clear the squares that have been clicked.
 
 - The application was designed to be responsive and support mobile & desktop devices. In order to preserve the size of the responsive chessboard where possible, the point where these two modes switch is at 950px (as opposed to a more standard 768px). This was done for purely aesthetic reasons, and can be easily changed by modifying the `scss` variables in `global.scss`.
 
