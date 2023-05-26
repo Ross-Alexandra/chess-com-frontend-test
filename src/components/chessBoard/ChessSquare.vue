@@ -35,6 +35,7 @@ const props = defineProps<{
     width: 100%;
     height: 100%;
 
+    cursor: pointer;
     transition: border-color 250ms, background-color 150ms;
 
     &__name {

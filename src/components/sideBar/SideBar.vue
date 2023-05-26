@@ -79,14 +79,14 @@ function clearSquares(): void {
     @media (max-width: $tablet-breakpoint) {
         width: 100%;
         height: 100%;
-
-        overflow: auto;
     }
 
     &__content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
         gap: 5px;
+
+        overflow: auto;
 
         &__title {
             font-size: 1.2rem;

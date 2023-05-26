@@ -5,6 +5,9 @@
                 v-for="squareIndex in 64"
                 :key="squareIndex"
                 @click="toggleSquare(squareIndex)"
+                draggable="true"
+                @dragstart="(e: DragEvent) => handleDragStart(e, squareIndex)"
+                @dragenter="toggleSquare(squareIndex, true)"
                 :class="{
                     selected: selectedSquares.squares.includes(squareIndex),
                 }"
@@ -19,15 +22,24 @@ import { selectedSquares } from '@/stores/selectedSquares';
 import ChessSquare from './ChessSquare.vue';
 import { onMounted, onUnmounted, ref } from 'vue';
 
-function toggleSquare(squareIndex: number): void {
-    if (selectedSquares.squares.includes(squareIndex)) {
+const boardSize = ref('0px');
+const dragSquareState = ref<'selecting' | 'unselecting'>('selecting');
+
+function handleDragStart(e: DragEvent, squareIndex: number): void {
+    e.dataTransfer?.setDragImage(new Image(), 0, 0);
+    toggleSquare(squareIndex);
+}
+
+function toggleSquare(squareIndex: number, obeyDragState=false): void {
+    if (selectedSquares.squares.includes(squareIndex) && (dragSquareState.value === 'unselecting' || !obeyDragState)) {
         selectedSquares.squares = selectedSquares.squares.filter((tile) => tile !== squareIndex);
-    } else {
+        dragSquareState.value = 'unselecting';
+    } else if ((dragSquareState.value === 'selecting' || !obeyDragState)){
         selectedSquares.squares.push(squareIndex);
+        dragSquareState.value = 'selecting';
     }
 }
 
-const boardSize = ref('0px');
 function setBoardSize(): void {
     const chessBoardWrapper = document.getElementById('chess-board-wrapper');
     if (chessBoardWrapper) {
