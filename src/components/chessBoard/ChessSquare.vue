@@ -1,6 +1,5 @@
 <template>
     <div
-
         :class="{
             'chess-board-square': true,
             'left-edge': getFile(props.squareIndex) === 'a',

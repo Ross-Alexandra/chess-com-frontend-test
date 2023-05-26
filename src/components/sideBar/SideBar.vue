@@ -2,7 +2,7 @@
     <div class="side-bar">
         <div class="side-bar__content">
             <div v-if="selectedSquaresCount === 0">
-                <h2 class="side-bar__content__title">Squares that you select on the board will be displayed here</h2>
+                <h2 class="side-bar__content__title no-squares-message">Squares that you select on the board will be displayed here</h2>
             </div>
 
             <div class="side-bar__content" v-else>

@@ -38,3 +38,6 @@ The project is structured as follows:
 - A theme switcher was added to the application to support light and dark mode versions of the application.
 - The application was designed to be responsive and support mobile & desktop devices. In order to preserve the size of the responsive chessboard where possible, the point where these two modes switch is at 950px (as opposed to a more standard 768px). This was done for purely aesthetic reasons, and can be easily changed by modifying the `scss` variables in `global.scss`.
 - The application allows a user to hold down the mouse button and drag over multiple squares to change their state. Square will only update if the change is the same as the one which initiated the drag. In other words, if you selected a square when starting your drag, squares you drag over can only be selected (never deselected). This is to prevent the user from accidentally deselecting squares when dragging over them. This can be easily changed by removing the `drag` event listeners from the `ChessBard.vue` component.
+
+## Testing
+The application has been tested using the [Jest](https://jestjs.io/) testing framework. The tests can be run using the `npm run test:unit` command.
