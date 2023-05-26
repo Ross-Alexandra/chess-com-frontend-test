@@ -1,6 +1,8 @@
 # Chess.com - Front End Programming Challenge
 Welcome to my implementation of the [Chess.com](https://chess.com) front end programming challenge!
 
+View live at [this link](https://chess-highlighter.rossalexandra.com/), or [this backup link](https://chess-com-assignment.web.app/) incase the DNS records haven't propagated on the first link.
+
 # Application Requirements
 1. Create a page with a chessboard and a sidebar.
 2. On desktop devices the sidebar should be positioned to the right of the chessboard.
