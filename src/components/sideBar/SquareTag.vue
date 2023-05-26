@@ -1,5 +1,5 @@
 <template>
-    <div class="square-tag">
+    <div class="square-tag" role="button">
         <slot />
     </div>
 </template>
@@ -28,6 +28,15 @@
         top: 50%;
         right: 5px;
         transform: translateY(-50%);
+    }
+
+    transition: filter 250ms ease-in-out;
+    &:hover {
+        filter: brightness(1.3);
+    }
+
+    &:active {
+        filter: brightness(0.7);
     }
 }
 </style>

@@ -30,14 +30,28 @@ The project is structured as follows:
 - The sidebar should be scrollable when the number of squares clicked exceeds the height of the sidebar.
 - The chessboard must remain square, not rectangular, when the screen size changes.
 
-## Design Decisions
-- When a highlighted square is clicked, it should be un-highlighted. This is to prevent the user from needing to search for the square in the sidebar to un-highlight it. If this is deemed to be a bad design decision, it can be easily reverted by removing the first condition in the `toggleSquare` method in the `ChessBoard.vue` component. 
-  - In the event this is reverted, in order to prevent a bug allowing the user to add a square multiple times, the `toggleSquare` method in the `ChessBoard.vue` component should be modified to check if the square is already in the sidebar before adding it.
-- A clear button was added to the sidebar to allow the user to clear the squares that have been clicked. This is to prevent the user from having to manually un-highlight each square in the sidebar or in the chess board. This can be easily removed by removing the `clear` button in the `SideBar.vue` component.
-- A hover effect was added to the squares on the chess board indicating which tile the user is hovering over. This is to provide the user with feedback as to which square they are about to click. This can be easily removed by removing the `p` element from the `ChessSquare.vue` component.
+## Additional Features
+While not required by the challenge, the following additional features were added to the application to improve a theoretical user's experience, and to make the application more interesting to build:
+- Squares which have been highlighted should be able to be un-highlighted.
+  - This allows users to undo mistakes.
+  - This allows users to change their mind about which squares they want to highlight.
+  - This allows users to use the application more fluidly to highlight squares and demonstrate patterns.
+  - This allows users to re-order the squares in the sidebar, by un-highlighting and re-highlighting them in the desired order.
 - A theme switcher was added to the application to support light and dark mode versions of the application.
+ - This allows users to use the application in their preferred theme.
+- Drag support was added to the application to allow users to drag over multiple squares to change their state.
+  - This allows users to use the application more fluidly to highlight squares and demonstrate patterns.
+  - This allows users to much more rapidly highlight squares, causing less strain on the user's wrist.
+
+All of the original requirements of the challenge were met, and the additional features were added on top of the original requirements. The additional features were added in a way that does not impact the original requirements, and can be easily removed if desired. Furthermore, the added features respect the intent of the original requirements, for example the sidebar will still keep track of the order in which squares were clicked, even if the user un-highlights a square. Squares which were un-highlighted will be removed from the sidebar, and the order of the remaining squares will be updated & preserved.
+
+## Design Decisions
+- In order to support allowing a user to un-highlight a square, the following design decisions were made:
+ - The sidebar tags are clickable, allowing a user to un-highlight a square.
+ - Highlighted squares are clickable, allowing a user to un-highlight a square.
+ - A clear button was added to the sidebar to allow the user to clear the squares that have been clicked.
+
 - The application was designed to be responsive and support mobile & desktop devices. In order to preserve the size of the responsive chessboard where possible, the point where these two modes switch is at 950px (as opposed to a more standard 768px). This was done for purely aesthetic reasons, and can be easily changed by modifying the `scss` variables in `global.scss`.
-- The application allows a user to hold down the mouse button and drag over multiple squares to change their state. Square will only update if the change is the same as the one which initiated the drag. In other words, if you selected a square when starting your drag, squares you drag over can only be selected (never deselected). This is to prevent the user from accidentally deselecting squares when dragging over them. This can be easily changed by removing the `drag` event listeners from the `ChessBard.vue` component.
 
 ## Testing
 The application has been tested using the [Jest](https://jestjs.io/) testing framework. The tests can be run using the `npm run test:unit` command.

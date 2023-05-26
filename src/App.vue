@@ -20,8 +20,6 @@ function toggleTheme() {
     localStorage.setItem('theme', theme.value);
 }
 
-const mobileBreakpoint = 950;
-
 export default defineComponent({
     name: 'App',
     components: {
@@ -31,7 +29,6 @@ export default defineComponent({
     setup() {
         return {
             theme,
-            mobileBreakpoint,
         };
     },
     methods: {
@@ -122,7 +119,6 @@ body {
     }
 
     background-color: var(--background-color);
-
 }
 
 #app {

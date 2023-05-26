@@ -4,14 +4,14 @@
             <ChessSquare 
                 v-for="squareIndex in 64"
                 :key="squareIndex"
-                @click="toggleSquare(squareIndex)"
-                draggable="true"
-                @dragstart="(e: DragEvent) => handleDragStart(e, squareIndex)"
-                @dragenter="toggleSquare(squareIndex, true)"
                 :class="{
                     selected: selectedSquares.includes(squareIndex),
                 }"
                 :squareIndex="squareIndex - 1 /* 0-indexed */"
+                draggable="true"
+                @click="toggleSquare(squareIndex)"
+                @dragstart="(e: DragEvent) => handleDragStart(e, squareIndex)"
+                @dragenter="toggleSquare(squareIndex, true)"
             />
         </div>
     </div>
@@ -50,6 +50,12 @@ function toggleSquare(squareIndex: number, obeyDragState=false): void {
     }
 }
 
+// Trying to get a perfect square board using purely CSS
+// grid is both messy and likely supported by all browsers.
+// Instead, we'll use JS to set the board size to the smallest
+// of the board's width, height, and the screen's width and height.
+// This will ensure the board is always a perfect square, and ensure
+// that the board is always fully visible on the screen.
 function setBoardSize(): void {
     const chessBoardWrapper = document.getElementById('chess-board-wrapper');
     if (chessBoardWrapper) {

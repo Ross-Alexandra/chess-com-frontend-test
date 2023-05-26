@@ -2,12 +2,11 @@
     <div
         :class="{
             'theme-slider': true,
-            'light': props.theme === 'light',
-            'dark': props.theme === 'dark',
+            [props.theme]: true,
         }"
-        @click="props.toggleTheme"
         role="switch"
         :aria-checked="props.theme === 'light' ? 'true' : 'false'"
+        @click="props.toggleTheme"
     >
         <div class="theme-slider__thumb">
             <SunIcon v-if="props.theme === 'light'" color="black" />

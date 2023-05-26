@@ -117,7 +117,6 @@ const props = defineProps<{
         }
     }
 
-
     &.bottom-edge {
         position: relative;
 

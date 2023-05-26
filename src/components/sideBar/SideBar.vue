@@ -60,9 +60,7 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .side-bar {
-    @import '@/global.scss';
-
-    width: 300px;
+    width: 100%;
     height: 100%;
 
     display: flex;
@@ -72,11 +70,6 @@ const props = defineProps<{
     border-left: 1px solid var(--layer-border-color);
     background-color: var(--layer-color);
     color: var(--sidebar-text-color);
-
-    @media (max-width: $tablet-breakpoint) {
-        width: 100%;
-        height: 100%;
-    }
 
     &__content {
         display: grid;
