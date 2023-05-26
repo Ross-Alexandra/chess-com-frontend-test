@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getRank, getFile } from '../helpers';
+import { getRank, getFile } from '@/helpers';
 
 const props = defineProps<{
     squareIndex: number;
@@ -27,6 +27,8 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .chess-board-square {
+    @import '@/global.scss';
+
     display: grid;
     place-items: center;
 
@@ -47,7 +49,7 @@ const props = defineProps<{
 
         user-select: none;
         
-        @media (max-width: 350px) {
+        @media (max-width: $small-mobile-breakpoint) {
             font-size: 0.5rem;
         }
     }

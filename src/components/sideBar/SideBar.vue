@@ -42,8 +42,8 @@
 import AppButton from '@/components/ui/AppButton.vue';
 import { selectedSquares } from '@/stores/selectedSquares';
 import { computed } from 'vue';
-import { getRank, getFile } from '../helpers';
-import ThemeSlider from '../ui/ThemeSlider.vue';
+import { getRank, getFile } from '@/helpers';
+import ThemeSlider from '@/components/ui/ThemeSlider.vue';
 import SquareTag from './SquareTag.vue';
 
 const selectedSquaresCount = computed(() => selectedSquares.squares.length);
@@ -63,6 +63,8 @@ function clearSquares(): void {
 
 <style lang="scss" scoped>
 .side-bar {
+    @import '@/global.scss';
+
     width: 300px;
     height: 100%;
 
@@ -74,7 +76,7 @@ function clearSquares(): void {
     background-color: var(--layer-color);
     color: var(--sidebar-text-color);
 
-    @media (max-width: 950px) {
+    @media (max-width: $tablet-breakpoint) {
         width: 100%;
         height: 100%;
 

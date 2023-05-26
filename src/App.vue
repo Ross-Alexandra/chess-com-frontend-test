@@ -20,6 +20,8 @@ function toggleTheme() {
     localStorage.setItem('theme', theme.value);
 }
 
+const mobileBreakpoint = 950;
+
 export default defineComponent({
     name: 'App',
     components: {
@@ -28,7 +30,8 @@ export default defineComponent({
     },
     setup() {
         return {
-            theme
+            theme,
+            mobileBreakpoint,
         };
     },
     methods: {
@@ -47,6 +50,8 @@ body {
 }
 
 .content {
+    @import '@/global.scss';
+
     display: grid;
     grid-template-columns: minmax(0px, 1fr) 300px;
     grid-template-rows: minmax(0px, 1fr);
@@ -59,16 +64,16 @@ body {
     height: 100vh;
     height: 100svh;
 
-    @media (max-width: 950px) {
+    @media (max-width: $tablet-breakpoint) {
         grid-template-columns: 1fr;
         grid-template-rows: minmax(0px, 1fr) 20vh;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: $mobile-breakpoint) {
         grid-template-rows: minmax(0px, 1fr) 30vh;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: $small-mobile-breakpoint) {
         grid-template-rows: minmax(0px, 1fr) 40vh;
     }
 
@@ -124,5 +129,7 @@ body {
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    --mobile-breakpoint: 950px;
 }
 </style>

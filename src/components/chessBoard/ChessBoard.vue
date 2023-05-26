@@ -52,6 +52,8 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 
 #chess-board-wrapper {
+    @import '@/global.scss';
+
     width: 100%;
     height: 100%;
 
@@ -65,7 +67,7 @@ onUnmounted(() => {
     --_padding-left: 45px;
     --_padding-right: 45px;
     
-    @media (max-width: 950px) {
+    @media (max-width: $tablet-breakpoint) {
         --_padding-top: 10px;
         --_padding-bottom: 30px;
         --_padding-left: 30px;
