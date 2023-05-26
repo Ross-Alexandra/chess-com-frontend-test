@@ -34,7 +34,7 @@ function toggleSquare(squareIndex: number, obeyDragState=false): void {
     if (selectedSquares.squares.includes(squareIndex) && (dragSquareState.value === 'unselecting' || !obeyDragState)) {
         selectedSquares.squares = selectedSquares.squares.filter((tile) => tile !== squareIndex);
         dragSquareState.value = 'unselecting';
-    } else if ((dragSquareState.value === 'selecting' || !obeyDragState)){
+    } else if (!selectedSquares.squares.includes(squareIndex) && (dragSquareState.value === 'selecting' || !obeyDragState)){
         selectedSquares.squares.push(squareIndex);
         dragSquareState.value = 'selecting';
     }
