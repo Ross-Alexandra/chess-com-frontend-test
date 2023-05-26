@@ -35,7 +35,7 @@ const props = defineProps<{
     width: 100%;
     height: 100%;
 
-    transition: border-color 250ms;
+    transition: border-color 250ms, background-color 150ms;
 
     &__name {
         margin: unset;
@@ -70,10 +70,14 @@ const props = defineProps<{
     &:nth-child(16n + 10),
     &:nth-child(16n + 12),
     &:nth-child(16n + 14) {
+
+        // Borders here are used to create a transition effects
+        // if the user changes themes or clicks the squares.
         background-color: var(--light-square-color);
         border: 10px solid var(--light-square-color);
 
         &.selected {
+            background-color: var(--light-square-highlight-color);
             border: 10px solid var(--light-square-highlight-color);
         }
     }
@@ -86,11 +90,14 @@ const props = defineProps<{
     &:nth-child(16n + 11),
     &:nth-child(16n + 13),
     &:nth-child(16n + 15) {
+
+        // Borders here are used to create a transition effects
+        // if the user changes themes or clicks the squares.
         background-color: var(--dark-square-color);
         border: 10px solid var(--dark-square-color);
 
-
         &.selected {
+            background-color: var(--dark-square-highlight-color);
             border: 10px solid var(--dark-square-highlight-color);
         }
     }
