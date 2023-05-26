@@ -9,7 +9,7 @@
                 @dragstart="(e: DragEvent) => handleDragStart(e, squareIndex)"
                 @dragenter="toggleSquare(squareIndex, true)"
                 :class="{
-                    selected: selectedSquares.squares.includes(squareIndex),
+                    selected: selectedSquares.includes(squareIndex),
                 }"
                 :squareIndex="squareIndex - 1 /* 0-indexed */"
             />
@@ -18,12 +18,21 @@
 </template>
 
 <script lang="ts" setup>
-import { selectedSquares } from '@/stores/selectedSquares';
+import {
+    computed,
+    onMounted,
+    onUnmounted,
+    ref
+} from 'vue';
+import { useStore } from 'vuex';
+
 import ChessSquare from './ChessSquare.vue';
-import { onMounted, onUnmounted, ref } from 'vue';
 
 const boardSize = ref('0px');
 const dragSquareState = ref<'selecting' | 'unselecting'>('selecting');
+
+const store = useStore();
+const selectedSquares = computed(() => store.state.squares);
 
 function handleDragStart(e: DragEvent, squareIndex: number): void {
     e.dataTransfer?.setDragImage(new Image(), 0, 0);
@@ -31,11 +40,12 @@ function handleDragStart(e: DragEvent, squareIndex: number): void {
 }
 
 function toggleSquare(squareIndex: number, obeyDragState=false): void {
-    if (selectedSquares.squares.includes(squareIndex) && (dragSquareState.value === 'unselecting' || !obeyDragState)) {
-        selectedSquares.squares = selectedSquares.squares.filter((tile) => tile !== squareIndex);
+    if (selectedSquares.value.includes(squareIndex) && (dragSquareState.value === 'unselecting' || !obeyDragState)) {
+        store.commit('removeSquare', squareIndex);
         dragSquareState.value = 'unselecting';
-    } else if (!selectedSquares.squares.includes(squareIndex) && (dragSquareState.value === 'selecting' || !obeyDragState)){
-        selectedSquares.squares.push(squareIndex);
+
+    } else if ((dragSquareState.value === 'selecting' || !obeyDragState)){
+        store.commit('addSquare', squareIndex);
         dragSquareState.value = 'selecting';
     }
 }

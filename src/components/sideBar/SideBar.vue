@@ -8,9 +8,9 @@
             <div class="side-bar__content" v-else>
                 <h2 class="side-bar__content__title">Selected Squares</h2>
                 <SquareTag 
-                    v-for="selectedSquare, index in selectedSquares.squares"
+                    v-for="selectedSquare, index in selectedSquares"
                     :key="selectedSquare"
-                    @click="removeSquare(selectedSquare)"
+                    @click="() => store.commit('removeSquare', selectedSquare)"
                 >
                     {{ index + 1 }}. {{ getFile(selectedSquare - 1) }}{{ getRank(selectedSquare - 1) }}
                 </SquareTag>
@@ -28,7 +28,7 @@
 
             <div class="side-bar__controls__control">
                 <AppButton 
-                    @click="clearSquares"
+                    @click="() => store.commit('clearSquares')"
                     :disabled="selectedSquaresCount === 0"
                 >
                     Clear
@@ -39,26 +39,23 @@
 </template>
 
 <script lang="ts" setup>
-import AppButton from '@/components/ui/AppButton.vue';
-import { selectedSquares } from '@/stores/selectedSquares';
 import { computed } from 'vue';
-import { getRank, getFile } from '@/helpers';
-import ThemeSlider from '@/components/ui/ThemeSlider.vue';
+import {useStore} from 'vuex';
+
 import SquareTag from './SquareTag.vue';
 
-const selectedSquaresCount = computed(() => selectedSquares.squares.length);
+import AppButton from '@/components/ui/AppButton.vue';
+import ThemeSlider from '@/components/ui/ThemeSlider.vue';
+import { getRank, getFile } from '@/helpers';
+
+const store = useStore();
+const selectedSquares = computed(() => store.state.squares);
+const selectedSquaresCount = computed(() => selectedSquares.value.length);
+
 const props = defineProps<{
     theme: string;
     toggleTheme: () => void;
 }>();
-
-function removeSquare(squareIndex: number): void {
-    selectedSquares.squares = selectedSquares.squares.filter((tile) => tile !== squareIndex);
-}
-
-function clearSquares(): void {
-    selectedSquares.squares = [];
-}
 </script>
 
 <style lang="scss" scoped>

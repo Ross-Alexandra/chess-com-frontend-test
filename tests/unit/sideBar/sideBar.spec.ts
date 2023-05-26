@@ -1,11 +1,21 @@
-import SideBar from '@/components/sideBar/SideBar.vue';
 import { fireEvent, render, screen } from '@testing-library/vue';
+import {createStore} from 'vuex';
+
+import SideBar from '@/components/sideBar/SideBar.vue';
+import { selectedSquaresStore } from '@/stores/selectedSquares';
+
 import '@testing-library/jest-dom';
-import { selectedSquares } from '@/stores/selectedSquares';
 
 describe('SideBar.vue', () => {
+    let store: typeof selectedSquaresStore;
+    
     beforeEach(() => {
-        selectedSquares.squares = [];
+        store = {
+            ...selectedSquaresStore,
+            state: {
+                squares: [] as number[],
+            },
+        };
     });
 
     it('Should call the toggleTheme function when the theme button is clicked', async () => {
@@ -15,6 +25,9 @@ describe('SideBar.vue', () => {
             props: {
                 theme: 'dark',
                 toggleTheme: toggleTheme,
+            },
+            global: {
+                plugins: [createStore(store)],
             },
         });
 
@@ -32,7 +45,11 @@ describe('SideBar.vue', () => {
                 theme: 'dark',
                 toggleTheme: () => {/* noop */},
             },
+            global: {
+                plugins: [createStore(store)],
+            },
         });
+
         const clearButton = container.querySelector('button') as HTMLButtonElement;
 
         expect(clearButton).not.toBeNull();
@@ -41,12 +58,14 @@ describe('SideBar.vue', () => {
     });
 
     it('Should clear all selected squares when the clear button is clicked', async () => {
-        selectedSquares.squares = [1, 2, 3, 4, 5, 6, 7, 8];
-
+        store.state = {squares: [1, 2, 3, 4, 5, 6, 7, 8]};
         const { container } = render(SideBar, {
             props: {
                 theme: 'dark',
                 toggleTheme: () => {/* noop */},
+            },
+            global: {
+                plugins: [createStore(store)],
             },
         });
         
@@ -57,16 +76,18 @@ describe('SideBar.vue', () => {
         expect(clearButton).not.toBeDisabled();
 
         await fireEvent.click(clearButton);
-        expect(selectedSquares.squares.length).toBe(0);
+        expect(store.state.squares.length).toBe(0);
     });
 
     it('Should display an ordered list of selected squares', async () => {
-        selectedSquares.squares = [1, 8, 2, 7, 3, 6, 4, 5];
-
+        store.state = {squares: [1, 8, 2, 7, 3, 6, 4, 5]};
         const { container } = render(SideBar, {
             props: {
                 theme: 'dark',
                 toggleTheme: () => {/* noop */},
+            },
+            global: {
+                plugins: [createStore(store)],
             },
         });
         
@@ -88,6 +109,9 @@ describe('SideBar.vue', () => {
             props: {
                 theme: 'dark',
                 toggleTheme: () => {/* noop */},
+            },
+            global: {
+                plugins: [createStore(store)],
             },
         });
 

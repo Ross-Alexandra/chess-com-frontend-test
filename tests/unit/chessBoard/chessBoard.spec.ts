@@ -1,23 +1,38 @@
-import ChessBoard from '@/components/chessBoard/ChessBoard.vue';
 import { fireEvent, render } from '@testing-library/vue';
-import { selectedSquares } from '@/stores/selectedSquares';
+import { createStore } from 'vuex';
+
+import ChessBoard from '@/components/chessBoard/ChessBoard.vue';
+import { selectedSquaresStore } from '@/stores/selectedSquares';
+
 import '@testing-library/jest-dom';
 
+
 describe('ChessBoard.vue', () => {
+    let store: typeof selectedSquaresStore;
+    
     beforeEach(() => {
-        selectedSquares.squares = [];
+        store = {
+            ...selectedSquaresStore,
+            state: {
+                squares: [] as number[],
+            },
+        };
     });
 
     it('Should render the correct number of squares', () => {
-        const { container } = render(ChessBoard);
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
 
         expect(container.getElementsByClassName('chess-board-square').length).toBe(64);
     });
 
     it('Should set a square as selected if it is clicked', async () => {
-        const { container } = render(ChessBoard);
-        const square = container.querySelector('[data-rank="8"][data-file="a"]');
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
 
+        const square = container.querySelector('[data-rank="8"][data-file="a"]');
         if (!square) {
             throw new Error('Could not find square');
         }
@@ -27,7 +42,10 @@ describe('ChessBoard.vue', () => {
     });
 
     it('Should set a square as selected and then unselected if it is clicked twice', async () => {
-        const { container } = render(ChessBoard);
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
+
         const square = container.querySelector('[data-rank="8"][data-file="a"]') as HTMLDivElement;
 
         expect(square).not.toBeNull();
@@ -41,7 +59,10 @@ describe('ChessBoard.vue', () => {
     });
 
     it('Should set all squares dragged over as selected when the drag starts on an unselected square', async () => {
-        const {container} = render(ChessBoard);
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
+
         const startSquare = container.querySelector('[data-rank="8"][data-file="a"]') as HTMLDivElement;
         const dragSquares = container.querySelectorAll('[data-rank="8"]') as NodeListOf<HTMLDivElement>;
 
@@ -62,9 +83,11 @@ describe('ChessBoard.vue', () => {
     });
 
     it('Should deselect all squares when the drag starts on a selected square', async () => {
-        selectedSquares.squares = [1, 2, 3, 4, 5, 6, 7, 8];
+        store.state = {squares: [1, 2, 3, 4, 5, 6, 7, 8]};
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
 
-        const {container} = render(ChessBoard);
         const startSquare = container.querySelector('[data-rank="8"][data-file="a"]') as HTMLDivElement;
         const dragSquares = container.querySelectorAll('[data-rank="8"]') as NodeListOf<HTMLDivElement>;
 
@@ -85,9 +108,11 @@ describe('ChessBoard.vue', () => {
     });
 
     it('Should select all unselected squares when the drag starts on an unselected square, but leave selected squares alone', async () => {
-        selectedSquares.squares = [2, 4, 6, 8];
+        store.state = {squares: [2, 4, 6, 8]};
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
 
-        const {container} = render(ChessBoard);
         const startSquare = container.querySelector('[data-rank="8"][data-file="a"]') as HTMLDivElement;
         const dragSquares = container.querySelectorAll('[data-rank="8"]') as NodeListOf<HTMLDivElement>;
 
@@ -108,9 +133,11 @@ describe('ChessBoard.vue', () => {
     });
 
     it('Should deselect all selected squares when the drag starts on a selected square, but leave unselected squares alone', async () => {
-        selectedSquares.squares = [1, 3, 5, 7];
+        store.state = {squares: [1, 3, 5, 7]};
+        const { container } = render(ChessBoard, {global: {
+            plugins: [createStore(store)],
+        }});
 
-        const {container} = render(ChessBoard);
         const startSquare = container.querySelector('[data-rank="8"][data-file="a"]') as HTMLDivElement;
         const dragSquares = container.querySelectorAll('[data-rank="8"]') as NodeListOf<HTMLDivElement>;
 

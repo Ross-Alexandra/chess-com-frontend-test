@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import ChessSquare from '@/components/chessBoard/ChessSquare.vue';
 
 describe('ChessSquare.vue', () => {
