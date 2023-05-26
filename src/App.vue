@@ -112,8 +112,8 @@ body {
         --board-border-color: #2a3439;
         --rank-and-file-color: #D3D3D3;
 
-        --light-square-highlight-color: #4682B4;
-        --dark-square-highlight-color: #2e6a9b;
+        --light-square-highlight-color: #0a7200;
+        --dark-square-highlight-color: #014209;
         --theme-color: #012a06;
 
         --button-background-color: var(--dark-square-color);
