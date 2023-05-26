@@ -24,7 +24,8 @@ The project is structured as follows:
   - `icons`: The SVG icons used in the application.
   - `ui`: General purpose & reusable UI components.
 - Helpers: Functions that are used throughout the application.
-- Stores: The vue `reactive` stores used in the application.
+- Stores: The `vuex` stores used in the application.
+  - `selectedSquares`: The store that keeps track of the squares that have been selected.
 - Tests: The unit tests for the application.
 
 ## Assumptions
@@ -40,7 +41,7 @@ While not required by the challenge, the following additional features were adde
   - This allows users to use the application more fluidly to highlight squares and demonstrate patterns.
   - This allows users to re-order the squares in the sidebar, by un-highlighting and re-highlighting them in the desired order.
 - A theme switcher was added to the application to support light and dark mode versions of the application.
- - This allows users to use the application in their preferred theme.
+  - This allows users to use the application in their preferred theme.
 - Drag support was added to the application to allow users to drag over multiple squares to change their state.
   - This allows users to use the application more fluidly to highlight squares and demonstrate patterns.
   - This allows users to much more rapidly highlight squares, causing less strain on the user's wrist.
